@@ -28,6 +28,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <SafariServices/SafariServices.h>
 
 @interface TUSafariActivity : UIActivity
 

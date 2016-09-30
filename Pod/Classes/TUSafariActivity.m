@@ -81,9 +81,17 @@
 
 - (void)performActivity
 {
-	BOOL completed = [[UIApplication sharedApplication] openURL:_URL];
-	
-	[self activityDidFinish:completed];
+    float systemVersion = [[[UIDevice currentDevice] systemVersion] floatValue];
+    BOOL completed = NO;
+    if (systemVersion >= 9) {
+        SFSafariViewController *safariViewController = [[SFSafariViewController alloc] initWithURL:_URL];
+        [[[[UIApplication sharedApplication] keyWindow] rootViewController] presentViewController:safariViewController animated:YES completion:nil];
+        completed = YES;
+    } else {
+        BOOL completed = [[UIApplication sharedApplication] openURL:_URL];
+    }
+    
+    [self activityDidFinish:completed];
 }
 
 @end
